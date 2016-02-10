@@ -1,0 +1,2 @@
+eval "$(thefuck --alias)"
+alias mocp='LC_CTYPE=UTF-8 mocp -T mocx'

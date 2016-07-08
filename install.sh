@@ -7,12 +7,7 @@ echo "Gerekli paketlerin yüklenmesi için parolanızı girin!"
 sudo apt-get update
 
 # install zsh, tmux
-sudo apt-get install -y zsh tmux vim vim-gtk build-essential cmake python-dev exuberant-ctags
-
-# tmux 2.0
-wget http://ftp.de.debian.org/debian/pool/main/t/tmux/tmux_2.0-3_amd64.deb
-sudo dpkg -i tmux_2.0-3_amd64.deb
-rm -f tmux_2.0-3_amd64.deb
+sudo apt-get install -y zsh tmux vim vim-gtk build-essential cmake exuberant-ctags
 
 if [ ! $SHELL="/bin/zsh" ]; then
 	echo "Kabuk değişimi için parolanızı girin!"
@@ -143,8 +138,11 @@ if [ ! -z "$DESKTOP_SESSION" ]; then
 	gconftool-2 --type boolean  --set /apps/guake/general/use_default_font false
 	gconftool-2 --type string  --set /apps/guake/style/font/style 'Monaco 12'
 	gconftool-2 --type integer  --set /apps/guake/style/background/transparency 0
+	gconftool-2 --type integer  --set /apps/guake/style/cursor_blink_mode 2
 	gconftool-2 --type integer  --set /apps/guake/general/window_height 100
+	gconftool-2 --type integer  --set /apps/guake/general/window_height_f 100
 	gconftool-2 --type boolean  --set /apps/guake/general/window_tabbar false
+	gconftool-2 --type boolean  --set /apps/guake/general/start_fullscreen true
 
 	# guake neon colorscheme
 	cd $GLOVE/tools/guake-colors
@@ -169,11 +167,6 @@ say "Vim eklentileri yükleniyor..."
 mkdir ~/.vim/.tmp
 
 vim +PluginInstall +qall
-
-# YCM
-say " YouCompleteMe bileşenleri kuruluyor..."
-cd ~/.vim/bundle/YouCompleteMe
-./install.sh
 
 # fzf
 say "fzf kuruluyor..."
